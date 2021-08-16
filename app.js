@@ -28,7 +28,7 @@ app.get("/getData", (req, res) => {
 })
 
 app.get("/scrape", async (req, res) => {
-    const { url } = req.query
+    const { url, pages } = req.query
     try {
         let day = new Date().getDate()
         let month = new Date().getMonth() + 1
@@ -38,7 +38,7 @@ app.get("/scrape", async (req, res) => {
 
         let job = cron.schedule(time, async () => {
             console.log('running a task every minute');
-            await scrape.scrape(url);
+            await scrape.scrape(url, pages);
             job.stop();
         });
        //let scrapping = await scrape.scrape(url);

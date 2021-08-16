@@ -2,7 +2,7 @@
 const puppeteer = require('puppeteer');
 const dataModel = require('./models').dataModel
 
-const scrape = async (url) => {
+const scrape = async (url, pages) => {
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
     });
@@ -10,7 +10,7 @@ const scrape = async (url) => {
     await page.goto(url);
     let dataArray = [];
     let dataFinish = [];
-    let lastPageNumber = 2;
+    let lastPageNumber = Number(pages);
     for (let index = 0; index < lastPageNumber; index++) {
         // wait 1 sec for page load
         console.log('ok')
