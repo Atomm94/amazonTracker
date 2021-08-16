@@ -50,8 +50,18 @@ app.get("/scrape", async (req, res) => {
 
 app.get("/scrapeUpc", async (req, res) => {
     try {
-        let scrappingUpc = await scrapeUpc.scrapeUpc();
-        res.status(200).send(scrappingUpc)
+        let day = new Date().getDate()
+        let month = new Date().getMonth() + 1
+        let hour = new Date().getHours()
+        let minutes = new Date().getMinutes() + 1
+        let time = `${minutes} ${hour} ${day} ${month} *`
+
+        let job = cron.schedule(time, async () => {
+            console.log('running a task every minute');
+            await scrapeUpc.scrapeUpc();
+            job.stop();
+        });
+        res.status(200).send({msg: 'ok'})
     } catch (ex) {
         res.status(200).send(ex)
     }
@@ -59,8 +69,19 @@ app.get("/scrapeUpc", async (req, res) => {
 
 app.get("/amazon", async (req, res) => {
     try {
-        let scrappingAmazon = await amazon.scrapeAmazon();
-        res.status(200).send(scrappingAmazon)
+        let day = new Date().getDate()
+        let month = new Date().getMonth() + 1
+        let hour = new Date().getHours()
+        let minutes = new Date().getMinutes() + 1
+        let time = `${minutes} ${hour} ${day} ${month} *`
+
+        let job = cron.schedule(time, async () => {
+            console.log('running a task every minute');
+            await amazon.scrapeAmazon();
+            job.stop();
+        });
+
+        res.status(200).send({msg: 'ok'})
     } catch (ex) {
         res.status(200).send(ex)
     }
