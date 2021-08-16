@@ -1,6 +1,6 @@
- const cron = require('node-cron');
-const express = require('express');
- const dataModel = require('./models').dataModel
+//  const cron = require('node-cron');
+// const express = require('express');
+//  const dataModel = require('./models').dataModel
 // let day = new Date().getDate()
 // let month = new Date().getMonth() + 1
 // let hour = new Date().getHours()
@@ -33,7 +33,7 @@ const express = require('express');
 //     scheduled: true
 // })
 
-     (async function d() {
-        let data = await dataModel.find().sort({"timestamp": -1}).limit(10);
-         console.log(data)
-        })()
+     // (async function d() {
+     //    let data = await dataModel.find().sort({"timestamp": -1}).limit(10);
+     //     console.log(data)
+     //    })()

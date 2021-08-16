@@ -58,7 +58,7 @@ app.get("/scrapeUpc", async (req, res) => {
         let minutes = new Date().getMinutes() + 1
         let time = `${minutes} ${hour} ${day} ${month} *`
 
-        let job = cron.schedule('*/30 * * * *', async () => {
+        let job = cron.schedule(time, async () => {
             console.log('running a task every minute');
             await scrapeUpc.scrapeUpc(urlData);
             job.stop();
