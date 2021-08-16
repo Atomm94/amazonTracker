@@ -5,6 +5,7 @@ const config = require('./config');
 const scrape = require('./scrape');
 const scrapeUpc = require('./scrapeUpc');
 const amazon = require('./amazon');
+const cron = require('node-cron');
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -29,8 +30,19 @@ app.get("/getData", (req, res) => {
 app.get("/scrape", async (req, res) => {
     const { url } = req.query
     try {
-       let scrapping = await scrape.scrape(url);
-       res.status(200).send(scrapping);
+        let day = new Date().getDate()
+        let month = new Date().getMonth() + 1
+        let hour = new Date().getHours()
+        let minutes = new Date().getMinutes() + 1
+        let time = `${minutes} ${hour} ${day} ${month} *`
+
+        let job = cron.schedule(time, async () => {
+            console.log('running a task every minute');
+            await scrape.scrape(url);
+            job.stop();
+        });
+       //let scrapping = await scrape.scrape(url);
+       res.status(200).send({msg: 'ok'});
     } catch (ex) {
         res.status(200).send(ex)
     }
