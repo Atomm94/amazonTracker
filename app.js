@@ -60,6 +60,9 @@ app.get("/scrapeUpc", async (req, res) => {
 
         let job = cron.schedule(time, async () => {
             console.log('running a task every minute');
+            for (let i=0; i<urlData.length; i++) {
+                urlData
+            }
             await scrapeUpc.scrapeUpc(urlData);
             job.stop();
         });
