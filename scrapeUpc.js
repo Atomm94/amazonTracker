@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
 // const dataModel = require('./models').dataModel
 const upcModel = require('./models').upcModel
-const jsonFile = require('jsonfile')
+//const jsonFile = require('jsonfile')
 const cron = require('node-cron');
 
 
-const scrapeUpc = (async (urlData) => {
+const scrapeUpc = async (urlData) => {
     console.time('tm');
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
@@ -60,7 +60,7 @@ const scrapeUpc = (async (urlData) => {
      console.log('finish')
     console.timeEnd('tm')
     return JSON.stringify(urlArray);
-})();
+};
 
 
 
