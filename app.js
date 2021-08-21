@@ -93,6 +93,7 @@ app.get("/amazon", async (req, res) => {
 app.get('/ok', async (req, res) => {
     try {
         let data = 'hello from Armenia!';
+        console.log(data)
         res.status(200).send({msg: data})
     } catch (ex) {
         res.status(200).send(ex)
