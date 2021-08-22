@@ -9,13 +9,14 @@ const scrapeUpc = async (urlData) => {
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
     });
-
+    console.log(urlData.length)
     let count=0;
     let upcData = [];
     let interval = 0;
     let urlArray;
 
     for (let d = 0; d < urlData.length; d++) {
+        console.log(urlData[d].urlArray)
         urlArray = urlData[d].urlArray;
         for(let index=0; index< urlArray.length; index++) {
             const page = await browser.newPage();
