@@ -6,7 +6,11 @@ const amazonModel = require('./models').amazonModel;
 const scrapeAmazon = async () => {
     console.time('aaa');
     const browser = await puppeteer.launch({
-        args: ['--no-sandbox']
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--single-process'
+        ]
     });
 
     let ii = await upcModel.find();

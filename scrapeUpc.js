@@ -8,7 +8,11 @@ const scrapeUpc = async (urlData) => {
     console.log(urlData)
     console.log(urlData.length)
     const browser = await puppeteer.launch({
-        args: ['--no-sandbox']
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--single-process'
+        ]
     });
 
     let count=0;

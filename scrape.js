@@ -4,7 +4,11 @@ const dataModel = require('./models').dataModel
 
 const scrape = async (url, pages) => {
     const browser = await puppeteer.launch({
-        args: ['--no-sandbox']
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--single-process'
+        ]
     });
     const page = await browser.newPage();
     await page.goto(url);
