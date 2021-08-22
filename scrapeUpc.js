@@ -6,10 +6,11 @@ const scrapeUpc = async (urlData) => {
     console.time('tm');
     console.log('afssfdfdf')
     console.log(urlData)
+    console.log(urlData.length)
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
     });
-    console.log(urlData.length)
+
     let count=0;
     let upcData = [];
     let interval = 0;
