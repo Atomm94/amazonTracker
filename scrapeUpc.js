@@ -4,6 +4,8 @@ const cron = require('node-cron');
 
 const scrapeUpc = async (urlData) => {
     console.time('tm');
+    console.log('afssfdfdf')
+    console.log(urlData)
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
     });
