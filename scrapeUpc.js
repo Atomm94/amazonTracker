@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 const upcModel = require('./models').upcModel
 const cron = require('node-cron');
 
-
 const scrapeUpc = async (urlData) => {
     console.time('tm');
     const browser = await puppeteer.launch({
@@ -23,7 +22,14 @@ const scrapeUpc = async (urlData) => {
                 await delay(10000);
                 interval = 0;
             }
-            await page.goto(urlArray[index],  {waitUntil: 'load', timeout: 0});
+            console.log('hi there')
+
+            try {
+                await page.goto(urlArray[index],  {waitUntil: 'load', timeout: 0});
+            } catch (err) {
+                console.log(err)
+            }
+            console.log('hello')
             console.log(count++)
             const teams = await page.evaluate( () => {
                 let db;

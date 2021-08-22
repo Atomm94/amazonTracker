@@ -20,6 +20,8 @@
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.12",
     "puppeteer": "^10.1.0",
+    "puppeteer-extra": "^3.1.18",
+    "puppeteer-extra-plugin-aws": "^1.0.2",
     "request": "^2.88.2"
   }
 }

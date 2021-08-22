@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const upcModel = require('./models').upcModel;
 const amazonModel = require('./models').amazonModel;
 
+
 const scrapeAmazon = async () => {
     console.time('aaa');
     const browser = await puppeteer.launch({
