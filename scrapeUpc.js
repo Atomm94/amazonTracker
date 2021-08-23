@@ -49,12 +49,12 @@ const scrapeUpc = async (urlData) => {
 
                 return db;
             })
-
+            await upcModel.create(teams);
             await upcData.push(teams);
         }
     }
 
-    await upcModel.insertMany(upcData)
+    //await upcModel.insertMany(upcData)
 
     let pages = await browser.pages();
     await Promise.all(pages.map(page =>page.close()));
