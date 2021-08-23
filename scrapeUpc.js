@@ -4,9 +4,6 @@ const cron = require('node-cron');
 
 const scrapeUpc = async (urlData) => {
     console.time('tm');
-    console.log('afssfdfdf')
-    console.log(urlData)
-    console.log(urlData.length)
     const browser = await puppeteer.launch({
         args: [
             '--no-sandbox',
@@ -21,7 +18,6 @@ const scrapeUpc = async (urlData) => {
     let urlArray;
 
     for (let d = 0; d < urlData.length; d++) {
-        console.log(urlData[d].urlArray)
         urlArray = urlData[d].urlArray;
         for(let index=0; index< urlArray.length; index++) {
             const page = await browser.newPage();
@@ -30,14 +26,13 @@ const scrapeUpc = async (urlData) => {
                 await delay(10000);
                 interval = 0;
             }
-            console.log('hi there')
 
             try {
                 await page.goto(urlArray[index],  {waitUntil: 'load', timeout: 0});
             } catch (err) {
                 console.log(err)
             }
-            console.log('hello')
+
             console.log(count++)
             const teams = await page.evaluate( () => {
                 let db;
