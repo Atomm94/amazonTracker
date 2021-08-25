@@ -42,7 +42,7 @@ app.get("/scrape", async (req, res) => {
             await scrape.scrape(url, pages);
             job.stop();
         });
-       //let scrapping = await scrape.scrape(url);
+
        res.status(200).send({msg: 'ok'});
     } catch (ex) {
         res.status(200).send(ex)

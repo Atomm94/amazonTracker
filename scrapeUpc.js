@@ -50,7 +50,7 @@ const scrapeUpc = async (urlData) => {
                 return db;
             })
             await upcModel.create(teams);
-            await upcData.push(teams);
+            upcData.push(teams);
         }
     }
 
