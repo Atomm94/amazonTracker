@@ -6,7 +6,8 @@ const scrape = require('./scrape');
 const scrapeUpc = require('./scrapeUpc');
 const amazon = require('./amazon');
 const cron = require('node-cron');
-const dataModel = require('./models').dataModel
+const dataModel = require('./models').dataModel;
+const { upcModel } = require('./models');
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -99,6 +100,24 @@ app.get('/ok', async (req, res) => {
         res.status(200).send(ex)
     }
 })
+
+app.get('/deleteData', async (req, res) => {
+    try {
+        let newData = [];
+        let data = await dataModel.find();
+        for(let i = 217; i < data.length; i++) {
+            if(!newData.includes(data[i])) {
+                newData.push(data[i])
+            }
+        }
+        await dataModel.deleteMany();
+        await dataModel.insertMany(newData); 
+        res.status(200).send({msg: 'finish'})
+    } catch (ex) {
+        res.status(200).send(ex)
+    }
+})
+
 
 let PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {

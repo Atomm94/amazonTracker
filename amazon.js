@@ -51,18 +51,24 @@ const scrapeAmazon = async () => {
             //db.mainHref = ii[index].href
             return db;
         })
-        teams.mainHref = newData[index].href
-        await data.push(teams)
-        await data.map(item => {
-            splitedText = item.text.split(' ')
-            if (!splitedText.includes('No') && !splitedText.includes('results')) {
-                finishData.push(item)
-            }
-        })
+ 
+        if(!teams.text.includes('No') && !teams.text.includes('results')) {
+            teams.mainHref = newData[index].href
+            await amazonModel.create(teams)
+        }
+        //teams.mainHref = newData[index].href
+        data.push(teams)
+        //await amazonModel.create(teams)
+        // await data.map(item => {
+        //     splitedText = item.text.split(' ')
+        //     if (!splitedText.includes('No') && !splitedText.includes('results')) {
+        //         finishData.push(item)
+        //     }
+        // })
 
     }
 
-    await amazonModel.insertMany(finishData)
+    //await amazonModel.insertMany(finishData)
 
     console.log('finish')
 
