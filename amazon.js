@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const upcModel = require('./models').upcModel;
 const amazonModel = require('./models').amazonModel;
-
+const jsonfile = require('jsonfile')
 
 const scrapeAmazon = async () => {
     console.time('aaa');
@@ -13,20 +13,22 @@ const scrapeAmazon = async () => {
         ]
     });
 
-    let ii = await upcModel.find();
+    //let ii = await upcModel.find();
 
     let data = [];
     let splitedText;
     let count = 0;
-    let newData = [];
+    //let newData = [];
     let finishData = [];
     let interval = 0;
 
-    for (let j=0; j<ii.length; j++) {
-        if (ii[j].upc !== null) {
-            newData.push(ii[j])
-        }
-    }
+    // for (let j=0; j<ii.length; j++) {
+    //     if (ii[j].upc !== null) {
+    //         newData.push(ii[j])
+    //     }
+    // }
+
+    let newData = await jsonfile.readFileSync('upc.json');
 
     for(let index=0; index< newData.length; index++) {
         const page = await browser.newPage();
@@ -58,6 +60,7 @@ const scrapeAmazon = async () => {
         }
         //teams.mainHref = newData[index].href
         data.push(teams)
+        await jsonfile.writeFileSync('amazon.json', data, { spaces: 2 })
         //await amazonModel.create(teams)
         // await data.map(item => {
         //     splitedText = item.text.split(' ')
