@@ -1,9 +1,14 @@
 const jsonfile = require('jsonfile')
 
-(async () => {
+const jb = async () => {
     let allAmazon = await jsonfile.readFileSync('allAmazonData.json')
-
+    let db = [];
     allAmazon.map(item => {
-        console.log(item.text.split(','))
+        if(item.text.split('results').length === 1) {
+            db.push(item)
+        }
     })
-})()
+    await jsonfile.writeFileSync('finishData.json', db, { spaces: 2 })
+}
+
+jb()
